@@ -1,0 +1,16 @@
+Assignment 6 - Louisa Schwed, Fabian Kern
+
+Exercise 3
+
+a) GCCG 315568
+
+b) TTTTTT 43869
+
+First of all we precomputed all possible qgrams with the given size q. We used the function 'product' that uses a given alphabet and a number and produces all possible combinations of the alphabet given the size q.
+We stored them in a dictionary with qgrams as keys and 0 as values.
+Then for each qgram we counted all neighbors with hamming distance 1 and stored the counts in the same dictionary.
+Having the reference sequence we ran through the sequence considering each possible qgram. For this qgram we computed the hamming distance to all possible qgrams in our dictionary. Our function computehamming takes two qgrams and counts the positions that are different. If the number is already greater than our given d, we stop the computation and return d+1. 
+Then if the distance is smaller or equal than the maximal distance we count +1 for the considered qgram in our dictionary.
+This will result in a dictionary containing all counts for the different qgrams.
+
+And then finally we compute the maxmimum of or dictionary and story it in a list in case that there are qgrams with the same maximal count of neigbors. At the end this list is printed.
