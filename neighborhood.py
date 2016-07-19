@@ -1,6 +1,8 @@
 import sys
 from itertools import product
 
+
+#for each qgram in the dictionary compute how many neigbors exist with distance d
 def computesize(reference, qgrams, d):
 	
 	for i in range(len(reference)-len(qgrams.keys()[0])):		
@@ -11,7 +13,8 @@ def computesize(reference, qgrams, d):
 				qgrams[key] += 1
 	
 				
-	
+
+#precomputation of all possible kmers of size q
 def computeqgrams(q):
 	
 	bases = ["A", "C", "G", "T"]
@@ -22,8 +25,10 @@ def computeqgrams(q):
 		qgrams["".join(gram)] = 0
 			
 	return qgrams
+			
 					
-		
+#computation of hamming distance between two qgrams
+#if distance is above the maximal d the computations stops		
 def computehamming(qgram1, qgram2, d):
 	
 	distance = 0
@@ -37,6 +42,7 @@ def computehamming(qgram1, qgram2, d):
 	return distance
 	
 
+#computation of the maximum number of neigbors, if two have the same, both are returned
 def computemax(qgrams):
 	
 	temp = 0
@@ -51,9 +57,11 @@ def computemax(qgrams):
 			
 	return maxi
 	
-
+	
+## MAIN
 def main():
 	
+	#reading of the input reference file
 	reference = ""
 	with open(str(sys.argv[1])) as f:
 		for line in f:
@@ -69,12 +77,9 @@ def main():
 	d = int(sys.argv[3])
 	
 	qgrams = computeqgrams(q)
-	print len(qgrams)
-	print qgrams
-	
-	computesize(reference, qgrams, d)
-	print qgrams
 
+	computesize(reference, qgrams, d)
+	
 	maxi = computemax(qgrams)
 	
 	for m in maxi:
